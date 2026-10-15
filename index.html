@@ -67,22 +67,6 @@ body {
   box-shadow: 0 0 0 8px var(--glow), 0 18px 40px rgba(0,0,0,.45);
   animation: rise .9s .15s ease-out both;
 }
-.hat {
-  position: absolute;
-  left: 3.72rem;
-  top: -1.52rem;
-  width: 5.75rem;
-  height: auto;
-  opacity: 0;
-  transform: rotate(-9deg);
-  transform-origin: 50% 92%;
-  filter: drop-shadow(0 6px 8px rgba(0,0,0,.45));
-  pointer-events: none;
-}
-.scene.cooked .hat {
-  opacity: 1;
-  animation: hatdrop 1s .45s cubic-bezier(.3,.7,.3,1) both;
-}
 .offer {
   position: absolute;
   right: -0.5rem;
@@ -132,7 +116,6 @@ body {
   animation: rise 1s ease-out both;
 }
 .note p:nth-child(1) { animation-delay: 1.8s; }
-.note p:nth-child(2) { animation-delay: 2.5s; }
 .sign {
   font-family: var(--hand);
   font-size: 1.9rem;
@@ -157,16 +140,6 @@ button {
 }
 button:hover { transform: translateY(-2px); box-shadow: 0 0 0 9px var(--glow); }
 button:focus-visible { outline: 2px solid var(--petal); outline-offset: 4px; }
-.after {
-  font-family: var(--hand);
-  font-size: 1.7rem;
-  line-height: 1.2;
-  color: var(--blush);
-  margin: 0;
-  text-wrap: balance;
-  animation: rise .9s 1.5s ease-out both;
-}
-.after[hidden] { display: none; }
 .petal {
   position: fixed;
   top: -2rem;
@@ -187,13 +160,6 @@ button:focus-visible { outline: 2px solid var(--petal); outline-offset: 4px; }
   60% { opacity: 1; }
   100% { opacity: 1; transform: none; }
 }
-@keyframes hatdrop {
-  0% { opacity: 0; transform: translateY(-6rem) rotate(-30deg) scale(.75); }
-  20% { opacity: 1; }
-  55% { transform: translateY(.3rem) rotate(-3deg) scale(1.06, .92); }
-  78% { transform: translateY(-.2rem) rotate(-12deg) scale(.98, 1.03); }
-  100% { opacity: 1; transform: rotate(-9deg); }
-}
 @keyframes fall {
   to { transform: translate(var(--drift), 110vh) rotate(var(--spin)); opacity: 0; }
 }
@@ -208,20 +174,8 @@ button:focus-visible { outline: 2px solid var(--petal); outline-offset: 4px; }
 <body>
 
 <main class="stage">
-  <div class="scene" id="scene" aria-label="Eduard îți întinde un trandafir">
+  <div class="scene" aria-label="Eduard îți întinde un trandafir">
     <img class="photo" alt="Eduard" src="data:image/jpeg;base64,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">
-    <svg class="hat" viewBox="0 0 120 106" aria-hidden="true">
-      <defs>
-        <linearGradient id="hatShade" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#ffffff"/>
-          <stop offset="1" stop-color="#e8dde0"/>
-        </linearGradient>
-      </defs>
-      <path d="M27 68 C6 66 2 39 22 33 C20 12 46 2 60 16 C74 2 100 12 98 33 C118 39 114 66 93 68 Z" fill="url(#hatShade)" stroke="#cbb9be" stroke-width="2" stroke-linejoin="round"/>
-      <path d="M44 66 C42 52 43 41 47 31 M60 67 C60 52 60 41 60 29 M76 66 C78 52 77 41 73 31" fill="none" stroke="#d8c9cd" stroke-width="2" stroke-linecap="round"/>
-      <path d="M26 63 Q60 71 94 63 L92 95 Q60 104 28 95 Z" fill="#fffdfc" stroke="#cbb9be" stroke-width="2" stroke-linejoin="round"/>
-      <path d="M28 72 Q60 79 92 72" fill="none" stroke="#e6dade" stroke-width="2" stroke-linecap="round"/>
-    </svg>
     <div class="offer" id="offer" aria-hidden="true">
       <span class="hand">🫴</span>
       <span class="rose">🌹</span>
@@ -229,13 +183,11 @@ button:focus-visible { outline: 2px solid var(--petal); outline-offset: 4px; }
   </div>
 
   <div class="note">
-    <p>Mi-ar plăcea să te invit în oraș sâmbătă.</p>
-    <p>Ai vrea să ieșim împreună?</p>
+    <p>Vrei să ieșim împreună sâmbătă?</p>
   </div>
   <p class="sign">— Eduard</p>
 
   <button id="take" type="button">Ia trandafirul</button>
-  <p class="after" id="after" role="status" hidden>Tu dai aprobarea, iar eu mă ocup de restul.</p>
 </main>
 
 <script>
@@ -270,8 +222,6 @@ button:focus-visible { outline: 2px solid var(--petal); outline-offset: 4px; }
   watchVisibility();
   var btn = document.getElementById('take');
   var offer = document.getElementById('offer');
-  var scene = document.getElementById('scene');
-  var after = document.getElementById('after');
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function petals(n) {
@@ -290,17 +240,15 @@ button:focus-visible { outline: 2px solid var(--petal); outline-offset: 4px; }
     }
   }
 
-  // Merge și butonul, și apăsarea direct pe trandafir. După ce îl ia, apare toca de bucătar pe poză.
+  // Merge și butonul, și apăsarea direct pe trandafir.
   var taken = false;
   function take() {
     if (taken) return;
     taken = true;
     offer.classList.add('taken');
-    scene.classList.add('cooked');
     sendOpened();
     notify('A luat trandafirul 🌹');
     btn.hidden = true;
-    after.hidden = false;
     petals(28);
   }
   btn.addEventListener('click', take);
