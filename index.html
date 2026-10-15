@@ -140,6 +140,16 @@ button {
 }
 button:hover { transform: translateY(-2px); box-shadow: 0 0 0 9px var(--glow); }
 button:focus-visible { outline: 2px solid var(--petal); outline-offset: 4px; }
+.after {
+  font-family: var(--hand);
+  font-size: 1.6rem;
+  line-height: 1.2;
+  color: var(--blush);
+  margin: 0;
+  text-wrap: balance;
+  animation: rise .9s .25s ease-out both;
+}
+.after[hidden] { display: none; }
 .petal {
   position: fixed;
   top: -2rem;
@@ -188,6 +198,7 @@ button:focus-visible { outline: 2px solid var(--petal); outline-offset: 4px; }
   <p class="sign">— Eduard</p>
 
   <button id="take" type="button">Ia trandafirul</button>
+  <p class="after" id="after" role="status" hidden>Pune trandafirul în apă, să te bucuri de el cât mai mult. 🌹</p>
 </main>
 
 <script>
@@ -222,6 +233,7 @@ button:focus-visible { outline: 2px solid var(--petal); outline-offset: 4px; }
   watchVisibility();
   var btn = document.getElementById('take');
   var offer = document.getElementById('offer');
+  var after = document.getElementById('after');
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function petals(n) {
@@ -249,6 +261,7 @@ button:focus-visible { outline: 2px solid var(--petal); outline-offset: 4px; }
     sendOpened();
     notify('A luat trandafirul 🌹');
     btn.hidden = true;
+    after.hidden = false;
     petals(28);
   }
   btn.addEventListener('click', take);
